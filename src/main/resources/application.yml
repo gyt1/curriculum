@@ -1,0 +1,59 @@
+server:
+  port: 8081
+  error:
+    path: /error
+
+spring:
+    # mysql
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://localhost:3306/curriculum?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      max-active: 20
+      initial-size: 1
+      max-wait: 3600000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      min-idle: 1
+      time-between-eviction-runs-millis: 3600000
+      min-evictable-idle-time-millis: 1800000
+      validation-query: select 1 from dual
+      filters: stat
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: false
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    timeout: 5000
+    database: 0
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+  cache:
+    type: redis
+    cache-names: campus
+    redis:
+      time-to-live: 60s
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  jackson:
+    time-zone: GMT+8
+    date-format: java.text.SimpleDateFormat
+  resources:
+    static-locations: classpath:/
+logging:
+  level.com.example.demo: debug
+
